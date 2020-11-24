@@ -1,0 +1,10 @@
+Domain Name for server is farmhomesafe.tk
+
+AWS Server Created For Homesafe
+Running Instance Includes
+DNS address is: ec2-54-229-1-58.eu-west-1.compute.amazonaws.com
+IP address is: 54.229.1.58
+
+KeyPair used for connection in puTTY is called FarmHomesafeKeyPair(.ppk) - was convered using puTTYgen (see it uploaded)
+
+Other team members within the group can connect thier puTTY to the AWS Running Instance I created (Roisin) Using the DNS address and the KeyPair uploaded.
