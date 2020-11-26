@@ -1,0 +1,85 @@
+Farm AWS Server Connection & Commands to set up in puTTY
+- Private Key (FarmHomesafeKeyPair.ppk)
+- PuTTy (login in as ubuntu first)
+- Do sudo apt-get update
+- Do sudo apt-get install apache2
+- Do sudo vim /etc/apache2/apache2.conf, then add ServerName - instance Id: ec2-54-229-1-58.eu-west-1.compute.amazonaws.com (esc :wq)
+- Do sudo apache2ctl configtest
+- Do sudo systemctl restart apache2
+- Check Connection on farmhomesafe.tk
+
+PubNub Connection in main.js file (Files uploaded) - Roisin created a pubnub app and is sharing the publishKey and subscribeKey for each member to have same connection.
+- publishKey : "pub-c-4c71c151-b075-498f-bfbc-c6f3221ed3b6",
+- subscribeKey : "sub-c-12924b4c-2f48-11eb-9713-12bae088af96",
+- uuid: "" (add your own random uuid - generator)
+Need to also change the my channel to var myChannel = "Homesafe"; (Should be done in main.js, all you need to add is your own uuid)
+
+PubNub Connection to Sensor in sensors.py (on Raspberry pi)
+- publishKey : 'pub-c-4c71c151-b075-498f-bfbc-c6f3221ed3b6'
+- subscribeKey : 'sub-c-12924b4c-2f48-11eb-9713-12bae088af96'
+- uuid: '' (add your own random uuid - generator)
+Need to also change the my channel to Homesafe (Should be done in sensors.py, all you need to add is your own uuid)
+
+puTTY Commands to do when setting up AWS & FlaskApp Files
+- Do sudo apt-get update
+- Do sudo apt-get install apache2
+- Do sudo apache2ctl configtest
+- Do sudo systemctl restart apache2
+- Do sudo apt-get install python3-dev python3-pip
+- Do sudo pip3 install pubnub
+- Do sudo pip3 install flask
+- Do cd /var/www
+- In /var/www do sudo mkdir FlaskApp
+- Do cd FlaskApp then sudo FlaskApp
+- Do sudo vim /etc/ssh/sshd_config
+- Uncomment PermitRootLogin and set to yes (esc :wq)
+- Do sudo passwd root (Change password)
+- Do sudo cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/
+- Do sudo reboot 
+- Copy files over to FlaskApp/FlaskApp using WinSCP (Files Uploaded)
+- Do sudo vim /etc/apache2/sites-available/FlaskApp.conf
+- In FlaskApp.conf Add the following:
+	<VirtualHost *:80>
+	ServerName farmhomesafe.tk
+	ServerAdmin D00219161@student.dkit.ie
+	ServerAlias www.farmhomesafe.tk
+	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
+	<Directory /var/www/FlaskApp/FlaskApp>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	Alias /static /var/www/FlaskApp/FlaskApp/static
+	<Directory /var/www/FlaskApp/FlaskApp/static>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	LogLevel warn
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+- Do cd /var/www/FlaskApp
+- Do sudo vim flaskapp.wsgi 
+- In flaskapp.wsgi  Add the following:
+	import sys
+	import logging
+	logging.basicConfig(stream=sys.stderr)
+	sys.path.insert(0,"/var/www/FlaskApp/")
+
+	from FlaskApp import app as application
+	application.secret_key = "" (add your own secret key name)
+- Do cd FlaskApp/
+- Do vim __init__.py & take out ip of pi in app.run() (should be already done in file uploaded)
+- Do sudo service apache2 restart
+- Do sudo service apache2 reload
+- Do cd /etc/apache2/sites-available & then do ls
+- Do a2dissite 000-default.conf (stop running on default browser)
+- a2ensite FlaskApp.conf (change default browser)
+- systemctl reload apache2 - (restart & check browser)
+- Do cd /var/log/apache2 & then do tail -20 error.log (Check for errors)
+- Do apt install certbot
+- Do apt-get update
+- Do apt install python3-certbot-apache
+- Do certbot --apache -d farmhomesafe.tk -d www.farmhomesafe.tk
+- (Input email, a to agree, then n to say no, then select 2)
+- Do cd /etc/letsencrypt/live/farmhomesafe.tk/privkey.pem
+
