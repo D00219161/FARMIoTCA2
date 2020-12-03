@@ -5,19 +5,23 @@
 	<title> Homesafe </title>
 	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.js"></script>
 	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.min.js"></script>
-	<script src="static/js/main.js"></script>
+<!--	<script src="static/js/main.js"></script>-->
+	<link rel ="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
 
 </head>
-<body onload = "keep_alive(); time();">
-	<link rel ="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
-	<h1> Homesafe </h1>
-	<ul>
-		<a><li>Connection: <span id= "Connection_id">...</span></li></a>
-	</ul>
-	<div>
-		<h3>Motion: <span id="Motion_id"></span></h3>
-		<label><input type="checkbox" id="buzzer" onclick="handleClick(this);">Buzzer On</label>
+<body>
+	<div class="header" id="header">
+		<img src="static/img/logo.jpg" alt="logo"/>
+		<h1> HomeSafe Login </h1>
 	</div>
+		<form>
+		<h3>User <label for="user">
+			<input type="textbox" id="user" user="firstname"></label></h3>
+		<h3>Password <label for="password">
+			<input type="textbox" id="password"></label></span></h3>
+			<input type="submit" value="Enter">
+		</form>
+
 	<span>
 		{% for message in get_flashed_messages() %}
 			{{ message }}
