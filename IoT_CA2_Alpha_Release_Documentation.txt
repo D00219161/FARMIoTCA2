@@ -1,0 +1,74 @@
+
+
+
+
+
+
+
+
+
+
+
+ 
+Homesafe
+Alpha Release Documentation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.	System Architecture
+1.1 Architecture Diagram
+ 
+Figure 1.1 System Architecture Flow Diagram
+
+We are using mongo database to hold three main data clusters; users, electricity usage and temperature usage. The Pi will be sending readings of the electricity usage and temperature to the mongo database. The data will be secured by mongo’s TLS encryption while at transit as well as using the cypher key within PubNub when connected to the server. The Pi will be able to communicate to the web server via the PubNub API. This communication will be secured with the aid of “myCipherKey” message encryption ensuring that messages in all the channels are secured.
+The user will access the application using the domain name to navigate to the website. They will be prompted with the login page where they will be required to enter their username and password to access their dashboard and view their analytics. The username and password entered will be checked against the users table.
+
+
+
+
+
+
+
+
+
+1.2 Fritzing & IoT Elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The main IoT hardware used is a Raspberry Pi as a microcontroller, an AC current sensor “wrap-around” clamp around the mains wire to record electricity usage. In the event where the microcontroller is placed and it is not within WiFi range, an external 5dBi antenna WiFi dongle with can be installed to connect to the network within the home.
+Because the AC Current sensor only sends out analogue output, an ADS1115 converter is required to convert analogue signals coming from the AC current sensor, to digital signals that the Pi will understand. The electricity sensor will take readings from the mains wire using the AC current sensor. This will take the amps and convert the value into kilowatts before totaling every 15 minutes to send this to the mongo database along with the timestamp via cron tasks. The data sent will be in JSON format to ensure mongo will be able to read the data correctly.
+The Flask website is hosted on AWS along with security groups being used to ensure web traffic is communicated via HTTPS over the domain name, and SSH using key pair credentials to prove authenticity of identity when connecting the Pi to the EC2 instance. The user data, electricity usage data, and home temperature data are being stored with mongoDB. MongoDB handles security of the data in transit by offering end-to-end encryption via TLS (transport layer security) protocol to ensure data is encrypted and secured.
