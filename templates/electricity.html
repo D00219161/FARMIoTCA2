@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset = "UTF-8">
+	<title> Electricity Usage </title>
+	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.js"></script>
+	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.min.js"></script>
+	<script src="static/js/main.js"></script>
+	<link rel ="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+</head>
+<head>
 </head>
 <body>
+<nav id="nav">
+<ul>
+	<img src="static/img/logo.jpg" alt="logo"/>
+	<h2>Homesafe</h2>
+	<li><a href="/dashboard">Dashboard</a></li>
+  	<li><a class="active" href="/electricity">Electricity Usage</a></li>
+  	<li><a href="/temperature">Temperature Analysis</a></li>
+  	<li><a href="/runningbill">Running Bill</a></li>
+</ul>
+</nav>
 
+<div class="container">
+<div class="row">
+<div class="columndate">
+    <input type="date" id="input">
+</div>
+</div>
+    <button class="button logout"><a href="/">Logout</a></button>
+    <button class="button settings"><a href="/settings">Settings</a></button>
+</div>
+
+<div class="row">
+<div class="column1">
+	<div class="boxed">
+    <h2>Total Cost Today</h2>
+	<h1>€3.90</h1>
+	<img src="static/img/Happy.jpg" alt="happy face" id="happy"/>
+	</div>
+	<div class="column2">
+        <div class="rectangle">
+			<button class="button button1">< Change Week ></button>
+		</div>
+    </div>
+</div>
+</div>
 </body>
+
 </html>
