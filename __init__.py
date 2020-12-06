@@ -2,25 +2,25 @@ from flask import Flask, render_template, url_for, session, flash
 import json, string, random, hashlib
 
 # Mongo Database import connection
-import pymongo
-from pymongo import MongoClient, dnspython
+#import pymongo
+#from pymongo import MongoClient
+#import dnspython
 
 from functools import wraps
-
 from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
 # Mongo DB Connection
-cluster = MongoClient("mongodb+srv://Roisin:DFM5CauDv8K9tXpY@cluster0.b528o.mongodb.net/home_safe?retryWrites=true&w=majority")
+#cluster = MongoClient("mongodb+srv://Roisin:DFM5CauDv8K9tXpY@cluster0.b528o.mongodb.net/home_safe?retryWrites=true&w=majority")
 # Mongo Database Config
-db = cluster["home_safe"]
-collection = db["electricity_usage"], db["temp_usage"], db["users"]
+#db = cluster["home_safe"]
+#collection = db["electricity_usage"], db["temp_usage"], db["users"]
 
-db = cluster(app)
+#db = cluster(app)
 
-from . import homesafeDB, PB
-
+#from . import homesafeDB, temperatureDB, electricityDB, PB
+from . import PB
 alive = 0
 data = {}
 
@@ -29,8 +29,9 @@ PB.grant_access("Homesafe-Matthew-Raspberry-Pi", True, True)  # Matthew's Pi Con
 PB.grant_access("Homesafe-Finbar-Raspberry-Pi", True, True)  # Finbar's Pi Connection to read & write
 
 
-@app.route("/login")
+@app.route("/")
 def index():
+    clear_session()
     return render_template("index.html")
 
 
@@ -41,12 +42,12 @@ def LoginRequired(f):
             if session['logged_in']:
                 return f(*args, **kwargs)
         flash("Please login first")
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
     return wrapper
 
 
-@app.route("/main")
+@app.route("/")
 @LoginRequired
 def main():
     flash(session["user"])
@@ -61,10 +62,39 @@ def clear_session():
     session['user_id'] = None
 
 
-@app.route("/")
-def login():
-    clear_session()
-    return render_template("login.html")
+@app.route("/create")
+def create():
+    return render_template("create.html")
+
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+
+@app.route("/electricity")
+def electricity():
+    return render_template("electricity.html")
+
+
+@app.route("/temperature")
+def temperature():
+    return render_template("temperature.html")
+
+
+@app.route("/settings")
+def settings():
+    return render_template("settings.html")
+
+
+@app.route("/notification")
+def notification():
+    return render_template("notification.html")
+
+
+@app.route("/runningbill")
+def runningbill():
+    return render_template("runningbill.html")
 
 
 @app.route("/logout")
@@ -73,18 +103,7 @@ def logout():
     homesafeDB.view_all()
     clear_session()
     flash("You just logged out")
-    return redirect(url_for("login"))
-
-
-@app.route("/keep_alive", methods=["GET"])
-def keep_alive():
-    global alive, data
-    alive += 1
-    keep_alive_count = str(alive)
-    data['keep_alive'] = keep_alive_count
-    parsed_json = json.dumps(data)
-    print(str(parsed_json))
-    return str(parsed_json)
+    return redirect(url_for("/"))
 
 
 def str_to_bool(s):

@@ -1,6 +1,7 @@
 # Mongo Database import connection
 import pymongo
-from pymongo import MongoClient, dnspython
+from pymongo import MongoClient
+import dnspython
 
 # Importing the db
 from .__init__ import db
@@ -157,7 +158,7 @@ def get_all_logged_in_users():
             read = "checked"
         else:
             read = "unchecked"
-        online_user_record["user_record"].append([row[n].firstname, row[n].surname, row[n].password,row[n].phoneNumbe,
+        online_user_record["user_record"].append([row[n].firstname, row[n].surname, row[n].password, row[n].phoneNumbe,
                                                   row[n].emailAddress, row[n].address, row[n].postCode,
                                                   row[n].dateOfBirth, row[n].gender, row[n].user_id, read])
         print(str(row[n].id) + " | " +
