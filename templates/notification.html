@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Notification</title>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.js"></script>
+	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.min.js"></script>
+	<script src="static/js/main.js"></script>
+	<link rel ="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
 </head>
 <body>
-
+<nav id="nav">
+<ul>
+    <img src="static/img/logo.jpg" alt="logo" id="logo"/>
+    <h2>Homesafe</h2>
+    <li><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/electricity">Average Electricity</a></li>
+    <li><a href="/temperature">Average Temperature</a></li>
+</ul>
+</nav>
 </body>
 </html>

@@ -3,38 +3,38 @@ var heartbeat_rate = 5000;
 
 var myChannel = "Homesafe";
 
-function keep_alive()
-{
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function(){
-		if(this.readyState === 4){
-			if(this.status === 200){
-				if(this.responseText !== null){
-					var date = new Date();
-					alive_second = date.getTime();
-					var keep_alive_data = this.responseText;
-					console.log(keep_alive_data);
-				}
-			}
+//function keep_alive()
+//{
+//	var request = new XMLHttpRequest();
+//	request.onreadystatechange = function(){
+//		if(this.readyState === 4){
+//			if(this.status === 200){
+//				if(this.responseText !== null){
+//					var date = new Date();
+//					alive_second = date.getTime();
+//					var keep_alive_data = this.responseText;
+//					console.log(keep_alive_data);
+//				}
+//			}
+//
+//		}
+//	};
+//	request.open("GET", "keep_alive", true);
+//	request.send(null);
+//	setTimeout('keep_alive()', heartbeat_rate);
+//}
 
-		}
-	};
-	request.open("GET", "keep_alive", true);
-	request.send(null);
-	setTimeout('keep_alive()', heartbeat_rate);
-}
-
-function time(){
-	var d = new Date();
-	var current_sec = d.getTime();
-	if(current_sec - alive_second > heartbeat_rate + 1000){
-		document.getElementById("Connection_id").innerHTML = " Dead";
-	}
-	else{
-		document.getElementById("Connection_id").innerHTML = " Alive";
-	}
-	setTimeout('time()', 1000);
-}
+//function time(){
+//	var d = new Date();
+//	var current_sec = d.getTime();
+//	if(current_sec - alive_second > heartbeat_rate + 1000){
+//		document.getElementById("Connection_id").innerHTML = " Dead";
+//	}
+//	else{
+//		document.getElementById("Connection_id").innerHTML = " Alive";
+//	}
+//	setTimeout('time()', 1000);
+//}
 
 function handleClick(cb){
 	if(cb.checked)
@@ -56,7 +56,7 @@ function handleClick(cb){
 pubnub = new PubNub({
         publishKey : "pub-c-4c71c151-b075-498f-bfbc-c6f3221ed3b6",
         subscribeKey : "sub-c-12924b4c-2f48-11eb-9713-12bae088af96",
-        uuid: ""
+        uuid: "7c6d9aa8-d4d1-4061-bc11-b6f590355178"
     })
 
 pubnub.addListener({

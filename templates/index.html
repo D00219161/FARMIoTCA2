@@ -2,30 +2,25 @@
 <html lang = "en">
 <head>
 	<meta charset = "UTF-8">
-	<title> Homesafe </title>
+	<title> Login </title>
 	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.js"></script>
 	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.min.js"></script>
-<!--	<script src="static/js/main.js"></script>-->
+	<script src="static/js/main.js"></script>
 	<link rel ="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
-
 </head>
 <body>
-	<div class="header" id="header">
+<div class="header">
 		<img src="static/img/logo.jpg" alt="logo"/>
-		<h1> HomeSafe Login </h1>
+		<h1> HomeSafe <br>
+		Login</h1>
 	</div>
 		<form>
 		<h3>User <label for="user">
-			<input type="textbox" id="user" user="firstname"></label></h3>
+			<input type="textbox" id="user" user="firstname" placeholder="Enter your username"></label></h3>
 		<h3>Password <label for="password">
-			<input type="textbox" id="password"></label></span></h3>
-			<input type="submit" value="Enter">
+			<input type="textbox" id="password"placeholder="Enter your password"></label></span></h3>
+			<button type="button"><a href="/dashboard">Enter</a></button>
 		</form>
-
-	<span>
-		{% for message in get_flashed_messages() %}
-			{{ message }}
-		{% endfor %}
-	</span>
-
+<footer><button type="button"><a href="/create">Create Account</a></button></footer>
 </body>
+</html>
