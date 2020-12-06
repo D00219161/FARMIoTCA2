@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset = "UTF-8">
+	<title> Create Account </title>
+	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.js"></script>
+	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.min.js"></script>
+	<script src="static/js/main.js"></script>
+	<link rel ="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
 </head>
 <body>
+<div class="header">
+		<img src="static/img/logo.jpg" alt="logo"/>
+		<h1> HomeSafe <br>
+			 Create Account </h1>
+	</div>
+		<form>
+		<h3>First Name <label for="fname">
+			<input type="textbox" id="fname" fname="firstname" placeholder="James"></label></h3>
+		<h3>Surname <label for="sname">
+			<input type="textbox" id="sname" placeholder="McPhillips"></label></span></h3>
+		<h3>Phone Number <label for="phoneNumber">
+			<input type="textbox" id="phoneNumber" placeholder="086 3431287"></label></span></h3>
+		<h3>Address <label for="address">
+			<input type="textbox" id="address" placeholder="Beechmount, Belturbet, Co. Cavan"></label></span></h3>
+		<h3>Postal Code <label for="postcode">
+			<input type="textbox" id="postcode" placeholder="TRZ23XY8"></label></span></h3>
+		<h3>Date Of Birth <label for="dob">
+			<input type="textbox" id="dob" placeholder="06/05/1980"></label></span></h3>
+		<h3>Gender<label for="gender">
+			<input type="textbox" id="gender" placeholder="Male"></label></span></h3>
+		<h3>Password<label for="password">
+			<input type="textbox" id="password" placeholder="H763hswd!"></label></span></h3>
+		<h3>Email Address (Optional)<label for="emailAddress">
+			<input type="textbox" id="emailAddress" placeholder="users@gmail.com"></label></span></h3>
+
+
+			<input type="submit" value="Save Changes" id="enter">
+			<button type="button"><a href="/">Login</a></button>
+			<button type="button"><a href="/dashboard">HomePage</a></button>
+		</form>
 
 </body>
 </html>

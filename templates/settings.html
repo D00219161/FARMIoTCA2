@@ -2,9 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Settings</title>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.js"></script>
+	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.8.min.js"></script>
+	<script src="static/js/main.js"></script>
+    <link rel ="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
 </head>
-<body>
+<style>
+.button2 {background-color: #f44336;} /* Red */
+.button3 {
+background-color: #FFFFFF;
+color: #000000;}
+.button4 {background-color: #FFFFFF;}
+.button5 {background-color: #FFFFFF;}
+.button6 {background-color: #FFFFFF;}
+.button7 {background-color: #FFFFFF;}
+.button8 {background-color: #FFFFFF;}
+.button9 {background-color: #FFFFFF;}
+.button10 {background-color: #FFFFFF;}
+.button11 {background-color: #FFFFFF;}
+</style>
 
+<nav id="nav">
+<ul>
+    <img src="static/img/logo.jpg" alt="logo" id="logo"/>
+    <h2>Homesafe</h2>
+    <li><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/electricity">Electricity Usage</a></li>
+    <li><a href="/temperature">Temperature Analysis</a></li>
+    <li><a href="/runningbill">Running Bill</a></li>
+</ul>
+</nav>
+
+<div class="container">
+<div class="row">
+<div class="columndate">
+    <input type="date" id="input">
+</div>
+</div>
+    <button class="button logout"><a href="/">Logout</a></button>
+    <button class="button settings"><a href="/settings">Settings</a></button>
+
+    <h1>Homesafe Settings</h1>
+</div>
+
+<form id="form">
+    <h3>Change Password</h3> <label for="passchange"><input type="textbox" id="passchange" passchange="password" placeholder="James1234!"></label>
+    <h3>Set Target</h3> <label for="target"><input type="textbox" id="target" placeholder="€45.00"></label>
+    <h3>Set Trustee</h3> <label for="trustee"><input type="textbox" id="trustee" placeholder="James"></label>
+    <h3>Add Room</h3> <label for="room"><input type="textbox" id="room" placeholder="Living Room"></label>
+</form>
+<input type="submit" value="Save Changes" id="enter">
+
+<p>
+    <p>
+    <h3>Colour Scheme For Room Temperature</h3>
+    <img src="static/img/green.jpg" alt="green" id="img1"/>
+    <p><h4>Green, Average Temperature</h4></p>
+    <img src="static/img/red.jpg" alt="red" id="img2"/>
+    <img src="static/img/orange.jpg" alt="orange" id="img3"/>
+    <img src="static/img/yellow.jpg" alt="yellow" id="img4"/>
+   <p> <h4>Red, Orange, Yellow -
+        Shows different versions of warm,
+        Red being the hottest
+    and yellow being the least hot. </h4></p>
+    <img src="static/img/blue.jpg" alt="blue" id="img5"/>
+    <img src="static/img/darkpurple.jpg" alt="darkpurple" id="img6"/>
+    <img src="static/img/purple.jpg" alt="purple" id="img7"/>
+    <p> <h4>Blue, Violet, Indigo -
+            Shows different versions of cold,
+            Indigo being the coldest
+            and Blue being the least cold. </h4></p>
+    </p>
+</div>
 </body>
 </html>
